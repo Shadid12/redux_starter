@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {selectMovie} from '../actions/index';
 
 class MoviesList extends React.Component {
     render() {
@@ -13,7 +15,12 @@ class MoviesList extends React.Component {
     renderList() {
         return this.props.movies.map((movie) => {
           return (
-            <li key={movie.title} >{movie.title}</li>
+            <li 
+                key={movie.title}
+                onClick={() => this.props.selectMovie(movie)} 
+            >
+                {movie.title}
+            </li>
           );
         });
     }
@@ -25,4 +32,10 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(MoviesList)
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        selectMovie: selectMovie
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviesList)
