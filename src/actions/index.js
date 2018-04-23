@@ -3,4 +3,11 @@ export function selectMovie(movie) {
       type: 'MOVIE_SELECTED',
       payload: movie
     };
+}
+
+export function searchMovie(movie) {
+  return {
+    type: 'MOVIE_SEARCH',
+    payload: movie
   }
+}
